@@ -121,31 +121,22 @@ public class wikiGame {
                 while ((line = reader.readLine()) != null&& ImDone==false) {
 
 
-                    if (line.contains("https:")) {
-                        xResult = line.indexOf("https");
+                    if (line.contains("/wiki/")) {
+                        xResult = line.indexOf("/wiki/");
+                        yResult = line.indexOf("\"", xResult);
 //                    System.out.println(xResult);
-                        String halfString;
-                        halfString = line.substring(xResult, line.length());
-                        if (halfString.contains("\"")) {
-                            yResult = line.indexOf("\"", xResult);
-//                        System.out.println(yResult);
-                        } else {
-                            if (halfString.contains("'")) {
-                                yResult = line.indexOf("'", xResult);
-//                            System.out.println(yResult);
-                            } else {
-                                if (halfString.contains("-")) {
-                                    yResult = line.indexOf("-", xResult);
-//                                System.out.println(yResult);
-                                }
-                            }
-                        }
+//                        String halfString;
+//                        halfString = line.substring(xResult);
+//                        if (halfString.contains("\"")) {
+//                            yResult = line.indexOf("\"");
+////                        System.out.println(yResult);
+//                        }
 //                    System.out.println(line);
                         String Links = line.substring(xResult, yResult);
 //                    System.out.println("*****" + Links);
 
-                        if (!Links.contains(".jpg") && Links.contains("wikipedia")) {
-                            RecursionProcess(Links, count, step+"\n"+Links);
+                        if (!Links.contains(".jpg") && Links.contains("/wiki/")) {
+                            RecursionProcess("https://en.wikipedia.org" + Links, count, step+"\n"+Links);
                         }
 //                        if (Links.contains(searchterm)) {
 //                            ResultsArea.append(step+"\n"+Links);
